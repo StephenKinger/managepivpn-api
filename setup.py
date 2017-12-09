@@ -89,7 +89,7 @@ setup(
         "Topic :: API",
     ],
 
-    install_requires=['mock>=2.0.0','docopt>=0.6.2'],
+    install_requires=['tornado>=4.5.2','mock>=2.0.0','docopt>=0.6.2'],
 
     # C'est un système de plugin, mais on s'en sert presque exclusivement
     # Pour créer des commandes, comme "django-admin".
@@ -99,7 +99,7 @@ setup(
     # La syntaxe est "nom-de-commande-a-creer = package.module:fonction".
     entry_points = {
         'console_scripts': [
-            'privaan = managepivpn-api:managepivpn-api_run',
+            'privaan = managepivpn-api:managepivpnapi_run',
         ],
     },
 
