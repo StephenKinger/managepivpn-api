@@ -8,7 +8,7 @@ import os
 
 # notez qu'on import la lib
 # donc assurez-vous que l'importe n'a pas d'effet de bord
-import privaan
+import managepivpnapi 
 
 
 class PostDevelopCommand(develop):
@@ -29,10 +29,10 @@ class PostInstallCommand(install):
 setup(
 
     # le nom de votre bibliothèque, tel qu'il apparaitre sur pypi
-    name='managepivpn-api',
+    name='managepivpnapi',
 
     # la version du code
-    version=managepivpn-api.__version__,
+    version=managepivpnapi.__version__,
 
     # Liste les packages à insérer dans la distribution
     # plutôt que de le faire à la main, on utilise la foncton
@@ -89,7 +89,7 @@ setup(
         "Topic :: API",
     ],
 
-    install_requires=['mock>=2.0.0','docopt>=0.6.2'],
+    install_requires=['tornado>=4.5.2','mock>=2.0.0','docopt>=0.6.2'],
 
     # C'est un système de plugin, mais on s'en sert presque exclusivement
     # Pour créer des commandes, comme "django-admin".
@@ -99,7 +99,7 @@ setup(
     # La syntaxe est "nom-de-commande-a-creer = package.module:fonction".
     entry_points = {
         'console_scripts': [
-            'privaan = managepivpn-api:managepivpn-api_run',
+            'privaan = managepivpnapi:managepivpnapi_run',
         ],
     },
 
@@ -113,5 +113,7 @@ setup(
         'develop': PostDevelopCommand,
         'install': PostInstallCommand,
     },
+
+    test_suite = 'tests',
 
 )
