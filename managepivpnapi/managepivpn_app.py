@@ -4,16 +4,29 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 import json
+from tornado.concurrent import run_on_executor
+from concurrent.futures import ThreadPoolExecutor   # `pip install futures` for python2
+import time
+
+
+MAX_WORKERS=5
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('index.html')
 
 class UserHandler(tornado.web.RequestHandler):
-    def getUserList(self):
+    executor = ThreadPoolExecutor(max_workers=MAX_WORKERS)
+
+    @run_on_executor
+    def retrieveUserList(self):
+        time.sleep(5)
         return {'me':'me'}
+
+    @tornado.gen.coroutine
     def get(self):
-        self.write(json.dumps(self.getUserList()))
+        result = yield self.retrieveUserList()
+        self.write(json.dumps(result))
 
 class Hello():
     def __init__(self, host, port):

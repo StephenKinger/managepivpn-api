@@ -9,7 +9,12 @@ import os
 # notez qu'on import la lib
 # donc assurez-vous que l'importe n'a pas d'effet de bord
 import managepivpnapi 
+import unittest
 
+def my_test_suite():
+    test_loader = unittest.TestLoader()
+    test_suite = test_loader.discover('tests', pattern='test_*.py')
+    return test_suite
 
 class PostDevelopCommand(develop):
     """Post-installation for development mode."""
@@ -114,6 +119,5 @@ setup(
         'install': PostInstallCommand,
     },
 
-    test_suite = 'tests',
-
+    test_suite='setup.my_test_suite',
 )

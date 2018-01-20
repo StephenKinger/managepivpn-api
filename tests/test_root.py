@@ -19,7 +19,7 @@ class RootTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         print "starting server"
-        cls.api = ManagePIVPNApp('0.0.0.0', '8082')
+        cls.api = ManagePIVPNApp('0.0.0.0', '8081')
         cls.backgroundserver = BackgroundServer(cls.api)
         cls.backgroundserver.start()
         time.sleep(1)
@@ -35,7 +35,7 @@ class RootTest(unittest.TestCase):
         http_client = httpclient.HTTPClient()
         no_exception = True
         try:
-            response = http_client.fetch("http://127.0.0.1:8082")
+            response = http_client.fetch("http://127.0.0.1:8081")
             print(response.body)
             self.assertIn('<body>', response.body, '<body> not present in response')
         except httpclient.HTTPError as e:
@@ -55,7 +55,7 @@ class RootTest(unittest.TestCase):
         http_client = httpclient.HTTPClient()
         no_exception = True
         try:
-            response = http_client.fetch("http://127.0.0.1:8082/user")
+            response = http_client.fetch("http://127.0.0.1:8081/user")
             print(response.body)
             self.assertEqual('{\"me\": \"me\"}', response.body, 'Not expected answer for user')
         except httpclient.HTTPError as e:
